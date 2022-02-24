@@ -2,19 +2,47 @@
 //
 
 #include <iostream>
+#include<set>
+#include<iterator>
+#include<cstring>
+using namespace std;
+
+set<string>::iterator it;
+bool contains(set<string>setToCheck,string valueToCheck)
+{
+    for (it = setToCheck.begin(); it != setToCheck.end(); ++it) {
+        if (*it == valueToCheck) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void unionWith(set<string> setA, set<string>setB) {
+    set<string>setTemp;
+
+    for (it = setA.begin(); it != setA.end(); ++it) {
+        setTemp.insert(*it);
+    }
+    for (it = setB.begin(); it != setB.end(); ++it) {
+        if (!contains(setTemp, *it))
+        {
+            setTemp.insert(*it);
+      }
+
+    }
+    for (it = setTemp.begin(); it != setTemp.end(); ++it) {
+        cout << *it << "/";
+    }
+}
+
+
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    set<string> setA = { "ivan","kaloan","kiril","mario" };
+    set<string> setB = { "martin","mario","petar","kiril" };
+    unionWith(setA, setB);
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
